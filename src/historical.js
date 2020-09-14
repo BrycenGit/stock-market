@@ -1,95 +1,74 @@
+import Chart from 'chart.js';
 export default class HistoricalData {
 
-
-
-
-
-  static getDataBySymbol(symbol) {
-    return new Promise(function (resolve, reject) {
-      let request = new XMLHttpRequest();
-      const url = `https://cloud.iexapis.com/stable/stock/${symbol}/chart/1m?token=${process.env.API_KEY}`;
-      console.log(url);
-      request.onload = function () {
-        if (this.status === 200) {
-          resolve(request.response);
-        } else {
-          reject(request.response);
-        }
-      };
-      request.open('GET', url, true);
-      request.send();
-    });
-  }
-  static getCloseGraphData(symbol) {
-    let result;
-    let promise = HistoricalData.getDataBySymbol(symbol);
-    promise.then(function (response) {
-      const body = JSON.parse(response);
-      console.log(body);
-      if (body.length > 0) {
-        let label = [];
-        let close = [];
-        for (let i = 0; i < body.length; i++) {
-          
-          label.push(body[i].label);
-          close.push(body[i].close);
-        }
-        result = {
-          'label': label,
-          'close': close
-        };
-        console.log(result);
-        //sessionStorage.setItem('result', result);
-      
-      } else {
-        console.log('error wrong symbol');
-      }
-    }, function (error) {
-      console.log(error);
-    });
-    return new Promise(result);
-  }
-    
-  static async getData(symbol) {
+  static async makeApiCall(symbol) {
     try {
-      const url = `https://cloud.iexapis.com/stable/stock/${symbol}/chart/1m?token=${process.env.API_KEY}`;
+      const url = `https://sandbox.iexapis.com/stable/stock/${symbol}/chart/1m?token=${process.env.API_KEY}`;
       const response = await fetch(url);
       if (!response.ok) {
         throw Error(response.statusText);
       }
       return response.json();
-    } catch(error) {
+    } catch (error) {
       return error.message;
     }
   }
-  static async getCloseData(symbol){
-    const response = await HistoricalData.getData(symbol);
-    console.log(response);
-    
+
+  static async getData(symbol, dataType) {
+    const response = await HistoricalData.makeApiCall(symbol);
     if (response.length > 0) {
       let label = [];
-      let close = []; 
+      let value = [];
       for (let i = 0; i < response.length; i++) {
-        
         label.push(response[i].label);
-        close.push(response[i].close);
+        value.push(response[i][dataType]);
       }
       let result = {
         'label': label,
-        'close': close
+        'value': value
       };
-      console.log(result);
-      //sessionStorage.setItem('result', result);
       return result;
     } else {
       console.log('error wrong symbol');
     }
+  }
+
+  static async getChart(canvas, symbol, dataTypeArr) {
+    let dataObjectArr = [];
+    let colors = ['red','green','blue','yellow','black','purple','brown','pink','silver'];
+    for (let i = 0; i < dataTypeArr.length; i++) {
+      let temp = await HistoricalData.getData(symbol, dataTypeArr[i]);
+      dataObjectArr.push(temp);
+    }
+    if (dataObjectArr.length > 0) {
+      let myChart = new Chart(canvas, {
+        type: 'line',
+        data: {
+          labels: dataObjectArr[0].label,
+          // datasets: [{
+          //   label: dataTypeArr[0],
+          //   data: dataObjectArr[0].value,
+          //   backgroundColor: 'transparent',
+          //   borderColor: 'green',
+          //   borderWidth: 1
+          // }],
+        },
+      });
+      for (let i = 0; i < dataObjectArr.length; i++) {
+        let data = {
+          label: dataTypeArr[i],
+          data: dataObjectArr[i].value,
+          backgroundColor: 'transparent',
+          borderColor: colors[i],
+          borderWidth: 1
+        };
+        myChart.data.datasets.push(data);
+      }
+      myChart.update();
+
+
+      console.log(myChart);
+    }
 
   }
-  
-
-
-
-
-
 }
