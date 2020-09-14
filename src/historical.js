@@ -45,13 +45,6 @@ export default class HistoricalData {
         type: 'line',
         data: {
           labels: dataObjectArr[0].label,
-          // datasets: [{
-          //   label: dataTypeArr[0],
-          //   data: dataObjectArr[0].value,
-          //   backgroundColor: 'transparent',
-          //   borderColor: 'green',
-          //   borderWidth: 1
-          // }],
         },
       });
       for (let i = 0; i < dataObjectArr.length; i++) {
@@ -65,10 +58,7 @@ export default class HistoricalData {
         myChart.data.datasets.push(data);
       }
       myChart.update();
-
-
       console.log(myChart);
     }
-
   }
 }
