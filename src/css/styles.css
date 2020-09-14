@@ -1,6 +1,18 @@
-.carousel-inner > .item > img,
+/* .carousel-inner > .item > img,
 .carousel-inner > .item > a > img {
   width: 70%;
   margin: auto;
-  
+
+} */
+.carousel-inner {
+  width: 75%;
+  height: auto;
+  float: none;
+  margin: auto;
 }
+
+
+body {
+  background-color: black
+}
+
