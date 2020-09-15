@@ -12,11 +12,11 @@ export default class StockInfo {
   }
 
   static async getData(symbol) {
-    let urlCompany = `https://sandbox.iexapis.com/stable/stock/${symbol}/company?token=${process.env.API_KEY}`;
+    let urlCompany = `https://cloud.iexapis.com/stable/stock/${symbol}/company?token=${process.env.API_KEY2}`;
     const responseCompany = await StockInfo.makeApiCall(urlCompany);
     let urlLogo = `https://cloud.iexapis.com/stable/stock/${symbol}/logo?token=${process.env.API_KEY2}`;
     const responseLogo = await StockInfo.makeApiCall(urlLogo);
-    let urlQuote = `https://sandbox.iexapis.com/stable/stock/${symbol}/quote?token=${process.env.API_KEY}`;
+    let urlQuote = `https://cloud.iexapis.com/stable/stock/${symbol}/quote?token=${process.env.API_KEY2}`;
     const responseQuote = await StockInfo.makeApiCall(urlQuote);
     // console.log(responseCompany);
     // console.log(responseLogo);

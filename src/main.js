@@ -7,23 +7,37 @@ import HistoricalData from './js/historical.js';
 import StockInfo from './js/stockInfo.js';
 import Search from './js/searchBar.js';
 
-function makeCarousel(keys, values, entries, imgArray) { // writes to carousel html
-  let html = ('');
+function makeCarousel(keys, values) {
+  
+  let temp = ["changePercent"];
+  let html = "";
   html += `<div class="carousel-item active">`;
-  html += `<div class='card search-card'><div class='card-header'>${keys[0]}</div>`;
-  html += `<div class='card-body'><img src=${imgArray[0]} style="height:100px;">`;
-  html += `<p>Company Name: ${values[0].quote.companyName}</p>`;
-  html += `<p>Real Time Price: $${values[0].quote.iexRealtimePrice}</p>`;
-  html += `</div></div></div>`;
+  html += `<div class='card search-card'>`;
+  html += `<div class='card-header'>${keys[0]}</div>`;
+  html += `<div class='card-body'>`;
+  html += `<div class="row">`;
+  html += `<div class='col'><img src=${values[0].logo.url} style="height:150px;"></div>`;
+  html += `<div class='col'><p>Company Name: ${values[0].quote.companyName}</p>`;
+  html += `<p>Real Time Price: $${values[0].quote.iexRealtimePrice}</p></div>`;
+  html += `<div class='col'><canvas id="#chart"></canvas></div>`;
+  html += `</div></div></div></div>`;
+  //HistoricalData.getChart("#chart", `${keys[0]}`, temp);
+  console.log(values[0].logo.url);
   for (let i = 1; i < keys.length; i++) {
+    let temp = ["changePercent"];
     html += `<div class="carousel-item">`;
-    html += `<div class='card search-card'><div class='card-header'>${keys[i]}</div>`;
-    html += `<div class='card-body'><img src=${imgArray[i]} style='height:100px;'>`;
-    html += `<p>Company Name: ${values[i].quote.companyName}</p>`;
-    html += `<p>Real Time Price: $${values[i].quote.iexRealtimePrice}</p>`;
-    html += `</div></div></div>`;
+    html += `<div class='card search-card'>`;
+    html += `<div class='card-header'>${keys[i]}</div>`;
+    html += `<div class='card-body'>`;
+    html += `<div class="row">`;
+    html += `<div class='col'><img src=${values[i].logo.url} style="height:150px;"></div>`;
+    html += `<div class='col'><p>Company Name: ${values[i].quote.companyName}</p>`;
+    html += `<p>Real Time Price: $${values[i].quote.iexRealtimePrice}</p></div>`;
+    html += `<div class='col'><canvas id="#chart${i}"></canvas></div>`;
+    html += `</div></div></div></div>`;
+    //HistoricalData.getChart(`#chart${i}`, `${keys[i]}`, temp);
   }
-  $('.carousel-inner').html(html);
+  $(".carousel-inner").html(html);
 }
 
 async function writeAutoComplete(input, searchBox) { //autocomplete for searching stock symbols
@@ -56,7 +70,7 @@ async function writeDetailCompanyInfo(symbol, divElement) {
   html = `<div class='card'>`;
   html += `<div class='card-header'>`;
   html += `<h3><img class='logo' src=${info.logo}>${info.companyName}(${info.symbol})</h3>`;
-  html += `<h2>${info.iexRealtimePrice} ${info.change} (${info.changePercent})</h2>`;
+  html += `<h2>$${info.iexRealtimePrice} ${info.change} (${info.changePercent})</h2>`;
   html += `<p>${d.toLocaleDateString()} ${d.toLocaleTimeString()}</p>`;
   html += `</div>`;
 
@@ -85,7 +99,7 @@ async function writeDetailCompanyInfo(symbol, divElement) {
 
   html += `</div>`;
   divElement.html(html);
-  HistoricalData.getChart($('#detail-div #chart'), symbol, ['close', 'changePercent', 'high', 'low', 'change', 'volume']);
+  //HistoricalData.getChart($('#detail-div #chart'), symbol, ['close', 'changePercent', 'high', 'low', 'change', 'volume']);
 }
 
 
@@ -96,8 +110,8 @@ $(document).ready(async function () {
       let imgArray = ['https://bit.ly/3iute7m', 'https://bit.ly/2ZCtaep', "https://bit.ly/3c2wfsX", 'https://bit.ly/2E08Ewu', 'https://bit.ly/2ZTvKNh'];
       let keys = Object.keys(response);
       let values = Object.values(response);
-      let entries = Object.entries(response);
-      makeCarousel(keys, values, entries, imgArray);
+      console.log(values);
+      makeCarousel(keys, values);
 
     });
   // let ch = $('#chart');

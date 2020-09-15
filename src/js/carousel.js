@@ -1,6 +1,6 @@
 export default class CarouselPage {
   static getCarousel(first, second, third, fourth, fifth) {
-    return fetch(`https://sandbox.iexapis.com/stable/stock/market/batch?symbols=${first},${second},${third},${fourth},${fifth}&types=quote,news,chart&range=1m&last=10&token=${process.env.API_KEY}`)
+    return fetch(`https://cloud.iexapis.com/stable/stock/market/batch?symbols=${first},${second},${third},${fourth},${fifth}&types=quote,news,chart,logo&range=1m&last=10&token=${process.env.API_KEY2}`)
       .then(function (response) {
         if (!response.ok) {
           throw Error(response.statusText);
