@@ -5,24 +5,38 @@ import './css/styles.css';
 import CarouselPage from "./js/carousel.js";
 import HistoricalData from './js/historical.js';
 
-function makeCarousel(keys, values, entries, imgArray) {
+function makeCarousel(keys, values, entries, imgArray, chartArray) {
+  let temp = ['high','low','close'];
   let html = ('');
+  
   html += `<div class="carousel-item active">`;
   html += `<div class='card search-card'><div class='card-header'>${keys[0]}</div>`;
   html += `<div class='card-body'><img src=${imgArray[0]} style="height:100px;">`;
   html += `<p>Company Name: ${values[0].quote.companyName}</p>`;
   html += `<p>Real Time Price: $${values[0].quote.iexRealtimePrice}</p>`;
+  html += `<canvas id="#chart"></canvas>`
+  HistoricalData.getChart('#chart', 'aapl', temp);
   html += `</div></div></div>`;
   for (let i=1; i<keys.length; i++) {
+    let temp = ['high','low','close'];
     html += `<div class="carousel-item">`;
     html += `<div class='card search-card'><div class='card-header'>${keys[i]}</div>`;
     html += `<div class='card-body'><img src=${imgArray[i]} style='height:100px;'>`;
     html += `<p>Company Name: ${values[i].quote.companyName}</p>`;
     html += `<p>Real Time Price: $${values[i].quote.iexRealtimePrice}</p>`;
+    html += `<canvas id="#chart${i}"></canvas>`
+    HistoricalData.getChart(`#chart${i}`, 'aapl', temp);
+    // html += `<canvas id="#chart${chartArray[i]}"></canvas>`
     html += `</div></div></div>`;
   }
   $('.carousel-inner').html(html);
 }
+
+// function displayGraph(keys) {
+//   let ch = $('#chart');
+//   let temp = ['high','low','close'];
+//   HistoricalData.getChart(ch, keys, temp);
+// }
 
 
 
@@ -34,12 +48,13 @@ $(document).ready(function() {
       let values = Object.values(response);
       let entries = Object.entries(response);
       makeCarousel(keys, values, entries, imgArray);
+      // let ch = $('#chart');
+      // let temp = ['high','low','close'];
+      // displayGraph(keys);
+      // let chartArray = [(HistoricalData.getChart(ch, 'appl', temp)), (HistoricalData.getChart(ch, 'amzn', temp))]
       
     });
-  let ch = $('#chart');
-  let temp = ['high','low','close'];
-  let myChart = HistoricalData.getChart(ch, 'aapl', temp);
-  console.log(myChart);
+
 });
 //import Chart from 'chart.js';
 
