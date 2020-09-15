@@ -10,7 +10,7 @@
     "test": "jest --coverage"
   },
   "keywords": [],
-  "author": "Daniel Schaaf, Joesph Niles, Brycen Bartolome, Michael Watts, Natalie Murphy",
+  "author": "Daniel Schaaf, Joesph Nilles, Brycen Bartolome, Michael Watts, Natalie Murphy",
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.6.4",

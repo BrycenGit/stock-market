@@ -6,7 +6,13 @@
   float: none;
   margin: auto;
 }
-
+.logo{
+  display: block;
+  float: left;
+  margin-right: 1%;
+  border: solid black;
+  
+}
 
 
 
