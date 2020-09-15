@@ -58,7 +58,6 @@ export default class HistoricalData {
         myChart.data.datasets.push(data);
       }
       myChart.update();
-      console.log(myChart);
     }
   }
 }

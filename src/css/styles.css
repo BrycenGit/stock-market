@@ -1,18 +1,28 @@
-
- 
 .carousel-inner {
-  width: 25;
-  height: auto;
-  float: none;
-  margin: auto;
+  width: 100%;
+  height: 270px;
+
+  align-items: center;
+
+  text-align: center;
 }
 
+.col {
+  align-items: center;
+}
 
 body {
-  background-color: black
+  background-color: black;
 }
 
-#test-chart{
-  width: 500px; 
+#test-chart {
+  width: 500px;
   height: 500px;
+}
+
+#chart {
+  margin: 20px;
+  padding: 20px;
+  float: none;
+  align-items: center;
 }
