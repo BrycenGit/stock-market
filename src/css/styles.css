@@ -1,0 +1,18 @@
+
+ 
+.carousel-inner {
+  width: 25;
+  height: auto;
+  float: none;
+  margin: auto;
+}
+
+
+body {
+  background-color: black
+}
+
+#test-chart{
+  width: 500px; 
+  height: 500px;
+}
