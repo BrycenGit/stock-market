@@ -1,0 +1,22 @@
+
+ 
+.carousel-inner {
+  width: 25;
+  height: auto;
+  float: none;
+  margin: auto;
+}
+.logo{
+  display: block;
+  float: left;
+  margin-right: 1%;
+  
+  
+}
+
+
+
+#test-chart{
+  width: 500px; 
+  height: 500px;
+}
