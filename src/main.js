@@ -62,6 +62,7 @@ function writeSearchResultsToList(results, list) {
 
 }
 
+
 async function writeDetailCompanyInfo(symbol, divElement) {
   let info = await StockInfo.getData(symbol);
   let html = '';
@@ -70,7 +71,11 @@ async function writeDetailCompanyInfo(symbol, divElement) {
   html = `<div class='card'>`;
   html += `<div class='card-header'>`;
   html += `<h3><img class='logo' src=${info.logo}>${info.companyName}(${info.symbol})</h3>`;
-  html += `<h2>$${info.iexRealtimePrice} ${info.change} (${info.changePercent})</h2>`;
+  if(info.changePercent > 0) {
+    html += `<h2>$${info.iexRealtimePrice} <span style='color: green;'>+${info.change} (${info.changePercent}%)</span></h2>`;
+  } else {
+    html += `<h2>$${info.iexRealtimePrice} <span style='color: red;'>${info.change} (${info.changePercent}%)</span></h2>`;
+  }
   html += `<p>${d.toLocaleDateString()} ${d.toLocaleTimeString()}</p>`;
   html += `</div>`;
 
@@ -78,11 +83,14 @@ async function writeDetailCompanyInfo(symbol, divElement) {
   html += `<div class='row'>`;
   html += `<div id='table-info' class='col-6'>`;
   html += `<table class="table table-striped">`;
-  html += `<tr><td>high</td><td>$${info.high}</td></tr>`;
-  html += `<tr><td>low</td><td>$${info.low}</td></tr>`;
-  html += `<tr><td>marketCap</td><td>$${info.marketCap}</td></tr>`;
+  html += `<tr><td>Exchange</td><td>${info.exchange}</td></tr>`;
+  html += `<tr><td>High</td><td>$${info.high}</td></tr>`;
+  html += `<tr><td>Low</td><td>$${info.low}</td></tr>`;
+  html += `<tr><td>MarketCap</td><td>$${info.marketCap.toLocaleString()}</td></tr>`;
   html += `<tr><td>P/E Ratio</td><td>${info.peRatio}</td></tr>`;
   html += `<tr><td>52 Week Range</td><td>$${info.week52Low}-$${info.week52High}</td></tr>`;
+  html += `<tr><td>YTD Change</td><td>${info.ytdChange}%</td></tr>`;
+  
   // html += `<tr>`;
   // html += `<td>low</td><td>market cap</td><td>P/E ratio</td><td>52 week range</td>`;
   // html += `</tr>`;

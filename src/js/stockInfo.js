@@ -72,12 +72,3 @@ export default class StockInfo {
 
 
 
-// "week52High"\
-// "week52Low"
-// marketCap
-// "ytdChange"
-// changePercent"
-// "latestPrice":
-// "high"//daily or alltime
-// "symbol": 
-// "companyName": 
