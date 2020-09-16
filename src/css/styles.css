@@ -1,11 +1,27 @@
 
- 
+body {background: #70A9A1;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+#landing {color: #f6f1d1}
+#info-carousel{
+  color:#f6F1D1;
+  font-size: 18px;
+  text-shadow: 1px 1px #0b2027
+  
+  
+}
 .carousel-inner {
   width: 25;
   height: auto;
   float: none;
   margin: auto;
+  border: 2px solid #0b2027;
 }
+.carousel-inner .card {
+  background-color:  #40798C;
+  border-style: none;
+}
+
 .logo{
   display: block;
   float: left;
@@ -13,7 +29,17 @@
   
   
 }
-
+#money{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border: 50% solid black;
+  margin-top: 2%;
+  margin-bottom: 1%;
+  box-shadow: 0 8px 24px 0 #f6F1D1;
+  width: 60%;
+  border-radius: 8px;
+}
 
 
 #test-chart{
@@ -32,7 +58,7 @@
   z-index: 1;
   top: 0;
   left: 0;
-  background-color: #111;
+  background-color: #0b2027;
   overflow-x: hidden;
   transition: 0.5s;
   padding-top: 60px;
@@ -42,13 +68,13 @@
   padding: 8px 8px 8px 32px;
   text-decoration: none;
   font-size: 25px;
-  color: #818181;
+  color: #70A9A1;
   display: block;
   transition: 0.3s;
 }
 
 .sideNav a:hover {
-  color: #f1f1f1;
+  color: #f6F1D1;
 }
 
 .sideNav .closebtn {
@@ -67,4 +93,38 @@
 @media screen and (max-height: 450px) {
   .sidenav {padding-top: 15px;}
   .sidenav a {font-size: 18px;}
+}
+#results-list a{
+  color: #f6F1D1;
+  text-decoration: none;
+}
+
+#results-list a:hover{
+  color:#40798C;
+  text-decoration: none;
+}
+#detail-div .card{
+  background-color:#f6F1D1;
+  padding: 3%;
+
+}
+#detail-div .card .table{
+  
+  background-color:#62b5d1;
+  color: #f6F1D1;
+  text-shadow: 1px #0b2027;
+
+}
+ .btn{
+  background-color:#62b5d1;
+}
+
+#chart-info{
+  background-color: white;
+  
+}
+
+.carouselChart{
+  background-color: white;
+  box-shadow: 1px 1px 5px #555 inset;
 }

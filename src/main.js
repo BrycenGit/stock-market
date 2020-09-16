@@ -17,8 +17,12 @@ function makeCarousel(keys, values) {
   html += `<div class="row">`;
   html += `<div class='col'><img src=${values[0].logo.url} style="height:150px;"></div>`;
   html += `<div class='col'><p>Company Name: ${values[0].quote.companyName}</p>`;
+  html += `<p>Change Amount: $${values[0].quote.change}</p>`;
+  html += `<p>Change Percent: ${(values[0].quote.changePercent *100).toFixed(2)}%</p>`;
+
+
   html += `<p>Real Time Price: $${values[0].quote.iexRealtimePrice}</p></div>`;
-  html += `<div class='col'><canvas id="#chart"></canvas></div>`;
+  html += `<div class='col'><canvas id="#chart" class="carouselChart"></canvas></div>`;
   html += `</div></div></div></div>`;
   HistoricalData.getChart("#chart", `${keys[0]}`, temp);
   console.log(values[0].logo.url);
@@ -31,8 +35,10 @@ function makeCarousel(keys, values) {
     html += `<div class="row">`;
     html += `<div class='col'><img src=${values[i].logo.url} style="height:150px;"></div>`;
     html += `<div class='col'><p>Company Name: ${values[i].quote.companyName}</p>`;
+    html += `<p>Change Amount: $${values[i].quote.change}</p>`;
+    html += `<p>Change Percent: ${(values[i].quote.changePercent *100).toFixed(2)}%</p>`;
     html += `<p>Real Time Price: $${values[i].quote.iexRealtimePrice}</p></div>`;
-    html += `<div class='col'><canvas id="#chart${i}"></canvas></div>`;
+    html += `<div class='col'><canvas id="#chart${i}" class="carouselChart"></canvas></div>`;
     html += `</div></div></div></div>`;
     HistoricalData.getChart(`#chart${i}`, `${keys[i]}`, temp);
   }
@@ -103,30 +109,30 @@ async function writeDetailCompanyInfo(symbol, divElement) {
   html += `<div class='card-header'>`;
   html += `<h3><img class='logo' src=${info.logo}>${info.companyName}(<span id='symbol'>${info.symbol}</span>)</h3>`;
   if (info.changePercent > 0) {
-    html += `<h2>$${info.iexRealtimePrice} <span style='color: green;'>+${info.change} (${info.changePercent}%)</span></h2>`;
+    html += `<h2>$${info.iexRealtimePrice} <span style='color: green;'>+${info.change} (${(info.changePercent * 100).toFixed(2)}%)</span></h2>`;
   } else {
-    html += `<h2>$${info.iexRealtimePrice} <span style='color: red;'>${info.change} (${info.changePercent}%)</span></h2>`;
+    html += `<h2>$${info.iexRealtimePrice} <span style='color: red;'>${info.change} (${(info.changePercent * 100).toFixed(2)}%)</span></h2>`;
   }
-  html += `<p>${d.toLocaleDateString()} ${d.toLocaleTimeString()} <button disabled id='stock-button'>Stock</button><button id='company-button'>Company</button><button id='add-button'>Add to Watchlist</button><button id='remove-button'>Remove from Watchlist</button></p>`;
+  html += `<p>${d.toLocaleDateString()} ${d.toLocaleTimeString()} <button class='btn btn-outline-dark' disabled id='stock-button'>Stock</button><button class='btn btn-outline-dark' id='company-button'>Company</button><button class='btn btn-outline-dark' id='add-button'>Add to Watchlist</button><button class='btn btn-outline-dark' id='remove-button'>Remove from Watchlist</button></p>`;
   html += `</div>`;
 
   html += `<div id='stock-info' class='card-body'>`;
   html += `<div class='row'>`;
-  html += `<div id='table-info' class='col-6'>`;
+  html += `<div id='table-info' class='col-4'>`;
   html += `<table class="table table-striped">`;
   html += `<tr><td>Exchange</td><td>${info.exchange}</td></tr>`;
   html += `<tr><td>High</td><td>$${info.high}</td></tr>`;
   html += `<tr><td>Low</td><td>$${info.low}</td></tr>`;
   html += `<tr><td>MarketCap</td><td>$${info.marketCap.toLocaleString()}</td></tr>`;
   html += `<tr><td>P/E Ratio</td><td>${info.peRatio}</td></tr>`;
-  html += `<tr><td>52 Week Range</td><td>$${info.week52Low}-$${info.week52High}</td></tr>`;
-  html += `<tr><td>YTD Change</td><td>${info.ytdChange}%</td></tr>`;
+  html += `<tr><td>52 Week Range</td><td>$${info.week52Low} - $${info.week52High}</td></tr>`;
+  html += `<tr><td>YTD Change</td><td>${(info.ytdChange * 100).toFixed(2)}%</td></tr>`;
 
 
 
   html += `</table>`;
   html += `</div>`;
-  html += `<div id='chart-info' class='col-6'>`;
+  html += `<div id='chart-info' class='col-8'>`;
   html += `<canvas id='chart'></canvas>`;
   html += `</div>`;
   html += `</div>`;
@@ -137,11 +143,11 @@ async function writeDetailCompanyInfo(symbol, divElement) {
   html += `<div id='table-info' class='col-12'>`;
   html += `<table class="table table-striped">`;
   html += `<tr><td>Company CEO</td><td>${info.ceo}</td></tr>`;
-  html += `<tr><td>Company description</td><td>${info.description}</td></tr>`;
+  html += `<tr><td>Company Description</td><td>${info.description}</td></tr>`;
   html += `<tr><td>Company Industry</td><td>${info.industry}</td></tr>`;
   html += `<tr><td>Tags:</td><td>${info.tags}</td></tr>`;
-  html += `<tr><td>city,state</td><td>${info.city}, ${info.state}</td></tr>`;
-  html += `<tr><td>Company website</td><td>${info.website}</td></tr>`;
+  html += `<tr><td>Location</td><td>${info.city}, ${info.state}</td></tr>`;
+  html += `<tr><td>Company Website</td><td><a href=${info.website}>${info.website}</a></td></tr>`;
   html += `</table>`;
   html += `</div>`;
   html += `</div>`;
@@ -152,7 +158,7 @@ async function writeDetailCompanyInfo(symbol, divElement) {
 
   html += `</div>`;
   divElement.html(html);
-  HistoricalData.getChart($('#detail-div #chart'), symbol, ['close', 'changePercent', 'high', 'low', 'change', 'volume']);
+  HistoricalData.getChart($('#detail-div #chart'), symbol, ['close', 'changePercent', 'high', 'low', 'change']);
 }
 
 function checkAddRemove(addButton, removeButton, symbol, watchList) {
@@ -198,6 +204,14 @@ function writeWatchList(watchlistArray) {
 
 $(document).ready(async function () {
   let watchlistArray = [];
+  if(sessionStorage.length > 0) {
+    console.log(sessionStorage);
+    watchlistArray = $.parseJSON(sessionStorage.getItem('watchlistArray'));
+    console.log(watchlistArray);
+  
+    writeWatchList(watchlistArray);
+  }
+  
   CarouselPage.getCarousel('aapl', 'amzn', 'fb', 'tsla', 'msft')
     .then(function (response) {
       let keys = Object.keys(response);
@@ -208,6 +222,7 @@ $(document).ready(async function () {
 
   $('#searchForm').submit(async function (event) { // for searching list of stocks
     event.preventDefault();
+    $('#landing').hide();
     let input = $('#stock').val();
     $('#stock').val('');
     let result = await Search.getData(input);
@@ -216,9 +231,12 @@ $(document).ready(async function () {
         console.log(result[0]);
         await writeDetailCompanyInfo(input, $('#detail-div'));
         checkAddRemove($('#add-button'), $('#remove-button'), input, watchlistArray);
+        $('#detail-div').show();
       } else {
         console.log(result);
         writeSearchResultsToList(result, $('#results-list'));
+        $('#results-list').show();
+        $('#detail-div').hide();
       }
     }
   });
@@ -232,6 +250,7 @@ $(document).ready(async function () {
     await writeDetailCompanyInfo($(this).attr('id'), $('#detail-div'));
     checkAddRemove($('#add-button'), $('#remove-button'), $(this).attr('id'), watchlistArray);
     $('#results-list').hide();
+    $('#detail-div').show();
   });
   $('#detail-div').on('click', '#stock-button', function () {
     $('#company-button').attr('disabled', false);
@@ -255,7 +274,7 @@ $(document).ready(async function () {
       $('#remove-button').attr('disabled', false);
     }
     writeWatchList(watchlistArray);
-
+    sessionStorage.watchlistArray = JSON.stringify(watchlistArray);
     console.log(watchlistArray);
 
   });
@@ -267,6 +286,7 @@ $(document).ready(async function () {
       $('#remove-button').attr('disabled', true);
     }
     writeWatchList(watchlistArray);
+    sessionStorage.watchlistArray = JSON.stringify(watchlistArray);
     console.log(watchlistArray);
   });
   $('#openNav').click(function(){
@@ -278,7 +298,9 @@ $(document).ready(async function () {
   $('#myWatchList').on('click', '.stocks', async function(){
     await writeDetailCompanyInfo($(this).attr('id'), $('#detail-div'));
     checkAddRemove($('#add-button'), $('#remove-button'), $(this).attr('id'), watchlistArray);
+    $('#detail-div').show();
     $('#results-list').hide();
+    $('#landing').hide();
   });
 
 });

@@ -35,7 +35,7 @@ export default class HistoricalData {
 
   static async getChart(canvas, symbol, dataTypeArr) {
     let dataObjectArr = [];
-    let colors = ['red','green','blue','yellow','black','purple','brown','pink','silver'];
+    let colors = ['red','green','blue','black','purple','brown','pink','silver'];
     const response = await HistoricalData.makeApiCall(symbol);
     if (response.length > 0) {
       for (let i = 0; i < dataTypeArr.length; i++) {
@@ -70,6 +70,7 @@ export default class HistoricalData {
         myChart.data.datasets.push(data);
       }
       myChart.update();
+      console.log(myChart);
     }
   }
 }
