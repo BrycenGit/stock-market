@@ -94,7 +94,7 @@ async function writeDetailCompanyInfo(symbol, divElement) {
   html += `<tr><td>Company description</td><td>${info.description}</td></tr>`;
   html += `<tr><td>Company Industry</td><td>${info.industry} , Tags: ${info.tags}</td></tr>`;
   html += `<tr><td>city,state</td><td>${info.city}, ${info.state}</td></tr>`;
-  html += `<tr><td>Company website</td><td>${info.website}</td></tr>`;
+  html += `<tr><td>Company website</td><td>${info.website}</td></tr>`; 
 
   
   // html += `<tr>`;
