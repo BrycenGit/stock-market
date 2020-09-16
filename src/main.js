@@ -91,14 +91,6 @@ async function writeDetailCompanyInfo(symbol, divElement) {
   html += `<tr><td>P/E Ratio</td><td>${info.peRatio}</td></tr>`;
   html += `<tr><td>52 Week Range</td><td>$${info.week52Low}-$${info.week52High}</td></tr>`;
   html += `<tr><td>YTD Change</td><td>${info.ytdChange}%</td></tr>`;
-<<<<<<< HEAD
-  html += `<tr><td>Company CEO</td><td>${info.ceo}</td></tr>`;
-  html += `<tr><td>Company description</td><td>${info.description}</td></tr>`;
-  html += `<tr><td>Company Industry</td><td>${info.industry} , Tags: ${info.tags}</td></tr>`;
-  html += `<tr><td>city,state</td><td>${info.city}, ${info.state}</td></tr>`;
-  html += `<tr><td>Company website</td><td>${info.website}</td></tr>`; 
-=======
->>>>>>> 10562959b7c14d2e03697b9b1914a96cc4dbcba1
 
   
   // html += `<tr>`;
