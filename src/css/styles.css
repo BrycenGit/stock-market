@@ -20,3 +20,6 @@
   width: 500px; 
   height: 500px;
 }
+#company-info{
+  display: none;
+}

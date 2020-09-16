@@ -66,6 +66,7 @@ function writeSearchResultsToList(results, list) {
 async function writeDetailCompanyInfo(symbol, divElement) {
   let info = await StockInfo.getData(symbol);
   let html = '';
+  let htmlCompany = '';
   let d = new Date(info.iexLastUpdate);
   //console.log(info);
   html = `<div class='card'>`;
@@ -76,10 +77,10 @@ async function writeDetailCompanyInfo(symbol, divElement) {
   } else {
     html += `<h2>$${info.iexRealtimePrice} <span style='color: red;'>${info.change} (${info.changePercent}%)</span></h2>`;
   }
-  html += `<p>${d.toLocaleDateString()} ${d.toLocaleTimeString()}</p>`;
+  html += `<p>${d.toLocaleDateString()} ${d.toLocaleTimeString()} <button disabled id='stock-button'>Stock</button><button id='company-button'>Company</button><button id='add-button'>Add to Watchlist</button><button id='remove-button'>Remove from Watchlist</button></p>`;
   html += `</div>`;
 
-  html += `<div class='card-body'>`;
+  html += `<div id='stock-info' class='card-body'>`;
   html += `<div class='row'>`;
   html += `<div id='table-info' class='col-6'>`;
   html += `<table class="table table-striped">`;
@@ -90,11 +91,6 @@ async function writeDetailCompanyInfo(symbol, divElement) {
   html += `<tr><td>P/E Ratio</td><td>${info.peRatio}</td></tr>`;
   html += `<tr><td>52 Week Range</td><td>$${info.week52Low}-$${info.week52High}</td></tr>`;
   html += `<tr><td>YTD Change</td><td>${info.ytdChange}%</td></tr>`;
-  html += `<tr><td>Company CEO</td><td>${info.ceo}</td></tr>`;
-  html += `<tr><td>Company description</td><td>${info.description}</td></tr>`;
-  html += `<tr><td>Company Industry</td><td>${info.industry} , Tags: ${info.tags}</td></tr>`;
-  html += `<tr><td>city,state</td><td>${info.city}, ${info.state}</td></tr>`;
-  html += `<tr><td>Company website</td><td>${info.website}</td></tr>`;
 
   
   // html += `<tr>`;
@@ -111,9 +107,27 @@ async function writeDetailCompanyInfo(symbol, divElement) {
   html += `</div>`;
   html += `</div>`;
 
+  html += `<div id='company-info' class='card-body'>`;
+  html += `<div class='row'>`;
+  html += `<div id='table-info' class='col-12'>`;
+  html += `<table class="table table-striped">`;
+  html += `<tr><td>Company CEO</td><td>${info.ceo}</td></tr>`;
+  html += `<tr><td>Company description</td><td>${info.description}</td></tr>`;
+  html += `<tr><td>Company Industry</td><td>${info.industry}</td></tr>`;
+  html += `<tr><td>Tags:</td><td>${info.tags}</td></tr>`;
+  html += `<tr><td>city,state</td><td>${info.city}, ${info.state}</td></tr>`;
+  html += `<tr><td>Company website</td><td>${info.website}</td></tr>`;
+  html += `</table>`;
+  html += `</div>`;
+  html += `</div>`;
+  html += `</div>`;
+
+
+
+
   html += `</div>`;
   divElement.html(html);
-  HistoricalData.getChart($('#detail-div #chart'), symbol, ['close', 'changePercent', 'high', 'low', 'change', 'volume']);
+  //HistoricalData.getChart($('#detail-div #chart'), symbol, ['close', 'changePercent', 'high', 'low', 'change', 'volume']);
 }
 
 
@@ -138,11 +152,7 @@ $(document).ready(async function () {
   $('#searchForm').submit(async function (event) { // for searching list of stocks
     event.preventDefault();
     let input = $('#stock').val();
-
-
-
-
-    console.log(input);
+    $('#stock').val('');
     let result = await Search.getData(input);
     if (result.length > 0) {
       if (input.toLowerCase() === result[0].symbol.toLowerCase()) {
@@ -165,6 +175,25 @@ $(document).ready(async function () {
   });
   $('#results-list').on('click', 'a', function () {
     writeDetailCompanyInfo($(this).attr('id'), $('#detail-div'));
+  });
+
+  $('#detail-div').on('click','#stock-button',function () {
+    $('#company-button').attr('disabled',false);
+    $('#stock-button').attr('disabled',true);
+    $('#stock-info').show();
+    $('#company-info').hide();
+  });
+  $('#detail-div').on('click','#company-button',function () {
+    $('#company-button').attr('disabled',true);
+    $('#stock-button').attr('disabled',false);
+    $('#stock-info').hide();
+    $('#company-info').show();
+  });
+  $('#detail-div').click('click', '#add-button',function () {
+
+  });
+  $('#detail-div').click('click', '#remove-button',function () {
+
   });
 
 });
