@@ -4,7 +4,7 @@
 
 #### Powered by IEX Cloud
 
-##### Septemeber 17, 2020
+##### September 17, 2020
 
 #### Created By
 
