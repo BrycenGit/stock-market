@@ -62,6 +62,28 @@ function writeSearchResultsToList(results, list) {
 
 }
 
+async function addToWatchlist(symbol,watchlistArray) {
+  let info = await StockInfo.getData(symbol);
+  let object = {
+    name: info.companyName,
+    symbol: info.symbol,
+    realtimePrice: info.iexRealtimePrice,
+    change: info.changePercent,
+  }
+  watchlistArray.push(object);
+}
+
+function removeFromList(symbol,watchlist) {
+for (let i=0; i<watchlist.length; i++) {
+  if (watchlist[i].symbol==symbol) {
+    // delete watchlist[i];
+    watchlist.splice(i, 1)
+    return
+  }
+}
+}
+
+
 
 async function writeDetailCompanyInfo(symbol, divElement) {
   let info = await StockInfo.getData(symbol);
@@ -133,9 +155,9 @@ async function writeDetailCompanyInfo(symbol, divElement) {
 
 
 $(document).ready(async function () {
+  let watchlistArray = [];
   CarouselPage.getCarousel('aapl', 'amzn', 'fb', 'tsla', 'msft')
     .then(function (response) {
-      let imgArray = ['https://bit.ly/3iute7m', 'https://bit.ly/2ZCtaep', "https://bit.ly/3c2wfsX", 'https://bit.ly/2E08Ewu', 'https://bit.ly/2ZTvKNh'];
       let keys = Object.keys(response);
       let values = Object.values(response);
       console.log(values);
