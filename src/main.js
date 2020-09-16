@@ -113,7 +113,7 @@ async function writeDetailCompanyInfo(symbol, divElement) {
 
   html += `</div>`;
   divElement.html(html);
-  //HistoricalData.getChart($('#detail-div #chart'), symbol, ['close', 'changePercent', 'high', 'low', 'change', 'volume']);
+  HistoricalData.getChart($('#detail-div #chart'), symbol, ['close', 'changePercent', 'high', 'low', 'change', 'volume']);
 }
 
 
