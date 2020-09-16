@@ -2,7 +2,7 @@
 
 #### View stocks, watch stocks and learn.
 
-#### Powerd by IEX Cloud
+#### Powered by IEX Cloud
 
 ##### Septemeber 17, 2020
 
@@ -16,7 +16,7 @@
 
 ## Description
 
-Stock X provides finacial data in a clear easy to read format. Powered by IEX Cloud, users can navigate easily to gain the latest information on companies of intrest. All the data you need to know in a easy to read and search format.
+Stock X provides financial data in a clear easy to read format. Powered by IEX Cloud, users can navigate easily to gain the latest information on companies of interest. All the data you need to know in a easy to read and search format.
 
 ## Setup/Installation Requirements
 
@@ -39,7 +39,7 @@ Stock X provides finacial data in a clear easy to read format. Powered by IEX Cl
 
 ## Known Bugs
 
-There is a limit to data when using the free version on iex cloud. This product calls on many data points so to run stably you will need to have a paid account wiht iex cloud.
+There is a limit to data when using the free version on iex cloud. This product calls on many data points so to run stably you will need to have a paid account with iex cloud.
 
 ## Support and contact details
 
