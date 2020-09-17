@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <title>The Stock Exchange</title>
+  </head>
+  <body>
+    <div class="container">
+      <div id="myWatchList" class="sideNav">
+        <a href="javascript:void(0)" class="closebtn" id="closeNav">&times;</a>
+      </div>
+      <div id="main">
+        <span style="font-size:30px; color:#0B2027; cursor:pointer" id="openNav">&#9776; Watch List</span>
+      </div>
+      <div
+        id="info-carousel"
+        class="carousel slide"
+        data-interval="2500"
+        data-ride="carousel"
+      >
+        <div class="carousel-inner"></div>
+      </div>
+      <div id="searchBar">
+        <form id="searchForm">
+          <label for="stock"></label><br />
+          <input
+            type="text"
+            required
+            id="stock"
+            name="stock"
+            autocomplete="off"
+            list="auto"
+          />
+          <button type="submit" class="btn btn-outline-dark" id="search">
+            search
+          </button>
+        </form>
+      </div>
+      <div id="landing">
+        <h1>Welcome To <strong>Watch List</strong></h1>
+        <p>Watch List provides financial data in a clear easy to read format.
+          Powered by IEX Cloud, users can navigate easily to gain the latest 
+          information on companies of interest. All the data you need to know 
+          in a easy to read and search format.</p>
+          <img src= "assests/img/stock-market2.jpg" alt ="money" id = 'money'>
+      </div>
+      <div id="results">
+        <ul id="results-list"></ul>
+      </div>
+      <div id="detail-div"></div>
+    </div>
+    </body>
+</html>

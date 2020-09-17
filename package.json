@@ -1,7 +1,7 @@
 {
   "name": "stock-market",
   "version": "1.0.0",
-  "description": "It will make a program that takes in a user input and then makes a api call to convert the currency",
+  "description": "Stock Market",
   "main": "index.js",
   "scripts": {
     "build": "webpack --mode=development",
@@ -10,7 +10,7 @@
     "test": "jest --coverage"
   },
   "keywords": [],
-  "author": "Daniel Schaaf,Joesph Niles, Brycen Bartolome, Michael Watts, Natalie Murphy",
+  "author": "Daniel Schaaf, Joesph Nilles, Brycen Bartolome, Michael Watts, Natalie Murphy",
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.6.4",
@@ -31,6 +31,7 @@
   },
   "dependencies": {
     "bootstrap": "^4.5.0",
+    "chart.js": "^2.9.3",
     "jquery": "^3.5.1",
     "popper.js": "^1.16.1"
   }
