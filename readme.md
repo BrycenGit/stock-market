@@ -1,4 +1,4 @@
-# _Stock X_ 🤑
+# WATCH LIST
 
 #### View stocks, watch stocks and learn.
 
@@ -16,12 +16,16 @@
 
 ## Description
 
-Stock X provides financial data in a clear easy to read format. Powered by IEX Cloud, users can navigate easily to gain the latest information on companies of interest. All the data you need to know in a easy to read and search format.
+Watch List provides financial data in a clear easy to read format. Powered by IEX Cloud, users can navigate easily to gain the latest information on companies of interest. All the data you need to know in a easy to read and search format.
 
 ## Setup/Installation Requirements
 
 - Download or clone project to your computer
-- Open project folder and add API Key
+- Open project folder and add API Key by following instructions below
+- Open terminal and navigate to the root directory of project
+- In terminal use command ```npm install```
+- Run ```npm run start```
+
 
 * API Key:
   - Visit https://iexcloud.io/
@@ -33,13 +37,10 @@ Stock X provides financial data in a clear easy to read format. Powered by IEX C
   - Create .env file and enter API_KEY:Your Key
   - Save .env file into project for access
 
-## Website
-
--link
 
 ## Known Bugs
 
-There is a limit to data when using the free version on iex cloud. This product calls on many data points so to run stably you will need to have a paid account with iex cloud.
+There is a limit to data when using the free version on iex cloud. Since this product uses many data points, it is highly recommended to have paid account for a more stable product. 
 
 ## Support and contact details
 
@@ -56,7 +57,10 @@ If you run into any issues or have questions, ideas or concerns contact the team
 - [iex cloud](https://iexcloud.io/about/) API
 - [Chart.js](https://www.chartjs.org/) for awesome 📈
 - jQuery
-- Javascript
+- JavaScript
+- CSS
+- HTML
+- Bootstrap
 
 ## License
 

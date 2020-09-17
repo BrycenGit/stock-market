@@ -2,7 +2,14 @@
 body {background: #70A9A1;
     font-family: Arial, Helvetica, sans-serif;
   }
-#landing {color: #f6f1d1}
+#landing h1 {
+  color: #f6f1d1;
+  text-align: center;
+}
+#landing {
+  color: #f6f1d1;
+}
+
 #info-carousel{
   color:#f6F1D1;
   font-size: 18px;
@@ -115,16 +122,22 @@ body {background: #70A9A1;
   text-shadow: 1px #0b2027;
 
 }
- .btn{
+.btn{
   background-color:#62b5d1;
 }
 
 #chart-info{
   background-color: white;
+  box-shadow: 1px 1px 5px #555 inset;
+  border-radius: 5px;
   
 }
 
 .carouselChart{
   background-color: white;
   box-shadow: 1px 1px 5px #555 inset;
+}
+
+#searchBar {
+  margin-bottom:2px ;
 }

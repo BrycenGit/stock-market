@@ -18,9 +18,6 @@ export default class StockInfo {
     const responseLogo = await StockInfo.makeApiCall(urlLogo);
     let urlQuote = `https://cloud.iexapis.com/stable/stock/${symbol}/quote?token=${process.env.API_KEY2}`;
     const responseQuote = await StockInfo.makeApiCall(urlQuote);
-    // console.log(responseCompany);
-    // console.log(responseLogo);
-    // console.log(responseQuote);
     if (responseCompany && responseLogo && responseQuote) {
       let result = {
         ceo: responseCompany.CEO,
@@ -51,24 +48,7 @@ export default class StockInfo {
       };
       return result;
     } else {
-      console.log('error wrong symbol');
       return [];
     }
   }
-
-
-
-
-
-
-
-
-
 }
-//`https://cloud.iexapis.com/stable/stock/${symbol}/company?token=${process.env.API_KEY}`
-//`https://cloud.iexapis.com/stable/stock/${symbol}/logo?token=${process.env.API_KEY}`
-//`https://sandbox.iexapis.com/stable/stock/${symbol}/quote?token=${process.env.API_KEY}`
-
-
-
-

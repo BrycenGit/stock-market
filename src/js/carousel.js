@@ -7,9 +7,5 @@ export default class CarouselPage {
         }
         return response.json();
       });
-    // catch(function(error) {
-    //   return error;
-
   }
 }
-// };=

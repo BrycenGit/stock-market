@@ -28,8 +28,6 @@ export default class HistoricalData {
         'value': value
       };
       return result;
-    } else {
-      console.log('error wrong symbol');
     }
   }
 
@@ -70,7 +68,6 @@ export default class HistoricalData {
         myChart.data.datasets.push(data);
       }
       myChart.update();
-      console.log(myChart);
     }
   }
 }

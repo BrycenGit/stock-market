@@ -12,25 +12,21 @@ function makeCarousel(keys, values) {
   let html = "";
   html += `<div class="carousel-item active">`;
   html += `<div class='card search-card'>`;
-  // html += `<div class='card-header'>${keys[0]}</div>`;
   html += `<div class='card-body'>`;
   html += `<div class="row">`;
   html += `<div class='col'><img src=${values[0].logo.url} style="height:150px;"></div>`;
   html += `<div class='col'><p>Company Name: ${values[0].quote.companyName}</p>`;
   html += `<p>Change Amount: $${values[0].quote.change}</p>`;
   html += `<p>Change Percent: ${(values[0].quote.changePercent *100).toFixed(2)}%</p>`;
-
-
+  
   html += `<p>Real Time Price: $${values[0].quote.iexRealtimePrice}</p></div>`;
   html += `<div class='col'><canvas id="#chart" class="carouselChart"></canvas></div>`;
   html += `</div></div></div></div>`;
   HistoricalData.getChart("#chart", `${keys[0]}`, temp);
-  console.log(values[0].logo.url);
   for (let i = 1; i < keys.length; i++) {
     let temp = ["changePercent"];
     html += `<div class="carousel-item">`;
     html += `<div class='card search-card'>`;
-    // html += `<div class='card-header'>${keys[i]}</div>`;
     html += `<div class='card-body'>`;
     html += `<div class="row">`;
     html += `<div class='col'><img src=${values[i].logo.url} style="height:150px;"></div>`;
@@ -83,7 +79,6 @@ async function addToWatchlist(symbol, watchlistArray) {
 function removeFromList(symbol, watchlist) {
   for (let i = 0; i < watchlist.length; i++) {
     if (watchlist[i].symbol == symbol) {
-      // delete watchlist[i];
       watchlist.splice(i, 1);
       return;
     }
@@ -104,7 +99,6 @@ async function writeDetailCompanyInfo(symbol, divElement) {
   let info = await StockInfo.getData(symbol);
   let html = '';
   let d = new Date(info.iexLastUpdate);
-  //console.log(info);
   html = `<div class='card'>`;
   html += `<div class='card-header'>`;
   html += `<h3><img class='logo' src=${info.logo}>${info.companyName}(<span id='symbol'>${info.symbol}</span>)</h3>`;
@@ -127,8 +121,6 @@ async function writeDetailCompanyInfo(symbol, divElement) {
   html += `<tr><td>P/E Ratio</td><td>${info.peRatio}</td></tr>`;
   html += `<tr><td>52 Week Range</td><td>$${info.week52Low} - $${info.week52High}</td></tr>`;
   html += `<tr><td>YTD Change</td><td>${(info.ytdChange * 100).toFixed(2)}%</td></tr>`;
-
-
 
   html += `</table>`;
   html += `</div>`;
@@ -153,40 +145,27 @@ async function writeDetailCompanyInfo(symbol, divElement) {
   html += `</div>`;
   html += `</div>`;
 
-
-
-
   html += `</div>`;
   divElement.html(html);
   HistoricalData.getChart($('#detail-div #chart'), symbol, ['close', 'changePercent', 'high', 'low', 'change']);
 }
 
 function checkAddRemove(addButton, removeButton, symbol, watchList) {
-  // alert(symbol);
   if (checkWatchlist(symbol, watchList)) {
-    //alert(symbol);
     addButton.attr('disabled', true);
     removeButton.attr('disabled', false);
-    // addButton.hide();
-    // removeButton.show();
   } else {
-    //alert('here');
     addButton.attr('disabled', false);
     removeButton.attr('disabled', true);
-    // addButton.show();
-    // removeButton.hide();
   }
 
 }
 function openNav() {
   $("#myWatchList").css('width', '250px');
-  //$("#main").css('marginLeft', "250px");
 }
 
 function closeNav() {
   $("#myWatchList").css('width', '0px');
-  //$("#main").css('marginLeft', "0px");
- 
 }
 
 
@@ -197,7 +176,6 @@ function writeWatchList(watchlistArray) {
       html += `<a class='stocks' href="#" id=${watchlistArray[i].symbol}>${watchlistArray[i].name}</a>`;
     }
   }
-  console.log(html);
   $('#myWatchList').html(html);
 }
 
@@ -205,10 +183,7 @@ function writeWatchList(watchlistArray) {
 $(document).ready(async function () {
   let watchlistArray = [];
   if(sessionStorage.length > 0) {
-    console.log(sessionStorage);
     watchlistArray = $.parseJSON(sessionStorage.getItem('watchlistArray'));
-    console.log(watchlistArray);
-  
     writeWatchList(watchlistArray);
   }
   
@@ -216,7 +191,6 @@ $(document).ready(async function () {
     .then(function (response) {
       let keys = Object.keys(response);
       let values = Object.values(response);
-      console.log(values);
       makeCarousel(keys, values);
     });
 
@@ -228,12 +202,10 @@ $(document).ready(async function () {
     let result = await Search.getData(input);
     if (result.length > 0) {
       if (input.toLowerCase() === result[0].symbol.toLowerCase()) {
-        console.log(result[0]);
         await writeDetailCompanyInfo(input, $('#detail-div'));
         checkAddRemove($('#add-button'), $('#remove-button'), input, watchlistArray);
         $('#detail-div').show();
       } else {
-        console.log(result);
         writeSearchResultsToList(result, $('#results-list'));
         $('#results-list').show();
         $('#detail-div').hide();
@@ -266,17 +238,12 @@ $(document).ready(async function () {
   });
   $('#detail-div').on('click', '#add-button', async function () {
     let symbol = $(this).parentsUntil('.card').parentsUntil('.card').find('#symbol');
-    console.log($(this).parentsUntil('.card').parentsUntil('.card'));
-    console.log(symbol.text());
-    
     if (await addToWatchlist(symbol.text(), watchlistArray)) {
       $('#add-button').attr('disabled', true);
       $('#remove-button').attr('disabled', false);
     }
     writeWatchList(watchlistArray);
     sessionStorage.watchlistArray = JSON.stringify(watchlistArray);
-    console.log(watchlistArray);
-
   });
   $('#detail-div').on('click', '#remove-button', function () {
     let symbol = $(this).parentsUntil('.card').parentsUntil('.card').find('#symbol');
@@ -287,7 +254,7 @@ $(document).ready(async function () {
     }
     writeWatchList(watchlistArray);
     sessionStorage.watchlistArray = JSON.stringify(watchlistArray);
-    console.log(watchlistArray);
+    
   });
   $('#openNav').click(function(){
     openNav();
